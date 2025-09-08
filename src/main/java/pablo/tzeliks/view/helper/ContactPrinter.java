@@ -3,21 +3,20 @@ package pablo.tzeliks.view.helper;
 import pablo.tzeliks.model.Contact;
 
 import java.util.List;
-import java.util.Locale;
 
-public class ContatcPrinter {
+public class ContactPrinter {
 
     public static void printList(List<Contact> list) {
 
         System.out.println();
         System.out.println("---- Contatos ----");
-        for (Contact dto : list) {
-            imprimirEquipamento(dto);
+        for (Contact contact : list) {
+            printContact(contact);
             System.out.println("----------------------");
         }
     }
 
-    public static void imprimirEquipamento(Contact contact) {
+    public static void printContact(Contact contact) {
 
         if (contact == null) {
             MessageHelper.erro("Contact null");
@@ -28,7 +27,7 @@ public class ContatcPrinter {
         System.out.println("Nome: " + contact.getName());
         System.out.println("Número de Telefone: " + contact.getPhoneNumber());
         System.out.println("Email: " + contact.getEmail());
-        System.out.println("Observation: " + contact.getObservation());
+        System.out.println("Observação: " + contact.getObservation());
     }
 
 }
