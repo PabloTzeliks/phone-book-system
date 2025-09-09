@@ -30,10 +30,10 @@ public class MenuHelper {
     }
 
     public static void menuSearchContact() {
-        System.out.println("---------- MENU PESQUISAR CONTATOS ----------\n");
-        System.out.println("\n- Pesquisar por Nome");
-        System.out.println("\n2- Pesquisar por Email");
-        System.out.println("\n3- Pesquisar por ID\n");
+        System.out.println("\n---------- MENU PESQUISAR CONTATOS ----------\n");
+        System.out.println("1- Pesquisar por Nome");
+        System.out.println("2- Pesquisar por Email");
+        System.out.println("3- Pesquisar por ID");
         System.out.println("\n0- Voltar");
     }
 

@@ -4,9 +4,7 @@ import pablo.tzeliks.service.ContactService;
 import pablo.tzeliks.view.helper.InputHelper;
 import pablo.tzeliks.view.helper.MenuHelper;
 import pablo.tzeliks.view.helper.MessageHelper;
-import pablo.tzeliks.view.menu.CreateContactView;
-import pablo.tzeliks.view.menu.ListAllContactsView;
-import pablo.tzeliks.view.menu.UpdateContactView;
+import pablo.tzeliks.view.menu.*;
 
 import java.util.Scanner;
 
@@ -32,23 +30,17 @@ public class ConsoleController {
                         CreateContactView.execute(scanner, service);
                         break;
                     case 2:
-                        ListAllContactsView.execute(scanner, service);
-                        break;
-                    case 3:
                         UpdateContactView.execute(scanner, service);
                         break;
-//                    case 4:
-//                        RegistrarMedicaoView.executar(scanner, serviceFacade);
-//                        break;
-//                    case 5:
-//                        HistoricoMedicoesView.executar(scanner, serviceFacade);
-//                        break;
-//                    case 6:
-//                        VerificarAlertasView.executar(scanner, serviceFacade);
-//                        break;
-//                    case 7:
-//                        SensoresCriticosView.executar(scanner, serviceFacade);
-//                        break;
+                    case 3:
+                        DeleteContactView.execute(scanner, service);
+                        break;
+                    case 4:
+                        SearchContactView.execute(scanner, service);
+                        break;
+                    case 5:
+                        ListAllContactsView.execute(scanner, service);
+                        break;
                     case 0:
                         System.out.println("Bye bye!");
                         break;

@@ -41,6 +41,25 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     @Override
+    public void updateContact(Contact contact) {
+        String sql = "UPDATE contact SET name = ?, phonenumber = ?, email = ?, observation = ? WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, contact.getName());
+            stmt.setString(2, contact.getPhoneNumber().getPhoneNumber());
+            stmt.setString(3, contact.getEmail().getValue());
+            stmt.setString(4, contact.getObservation());
+            stmt.setLong(5, contact.getId());
+
+            int affected = stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void deleteContact(Contact contact) {
 
         String sqlById = "DELETE FROM contact WHERE id = ?";
@@ -64,25 +83,6 @@ public class ContactDAOImpl implements ContactDAO {
                 throw new ContactNotFoundException("Cannot find contact to delete: " +
                         (contact.getId() > 0 ? contact.getId() : contact.getEmail().getValue())); // Caso houver ID, deleta por ID, se não, deleta por Email.
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void updateContact(Contact contact) {
-        String sql = "UPDATE contact SET name = ?, phonenumber = ?, email = ?, observation = ? WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, contact.getName());
-            stmt.setString(2, contact.getPhoneNumber().getPhoneNumber());
-            stmt.setString(3, contact.getEmail().getValue());
-            stmt.setString(4, contact.getObservation());
-            stmt.setLong(5, contact.getId());
-
-            int affected = stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,6 +138,36 @@ public class ContactDAOImpl implements ContactDAO {
                 String observation = rs.getString("observation");
 
                 return new Contact(id, name, new PhoneNumber(phonenumberDb), new Email(emailDb), observation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Contact findContactByName(String name) {
+
+        String sql = "SELECT id, name, phonenumber, email, observation FROM contact WHERE name LIKE ?";
+
+        String formatName = '%' + name + '%';
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, formatName);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (!rs.next()) {
+                    throw new ContactNotFoundException("Cannot find contact by name: " + name);
+                }
+
+                long id = rs.getLong("id");
+                String nameDb = rs.getString("name");
+                String phonenumberDb = rs.getString("phonenumber");
+                String emailDb = rs.getString("email");
+                String observation = rs.getString("observation");
+
+                return new Contact(id, nameDb, new PhoneNumber(phonenumberDb), new Email(emailDb), observation);
             }
         } catch (SQLException e) {
             e.printStackTrace();

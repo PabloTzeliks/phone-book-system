@@ -56,7 +56,6 @@ public class UpdateContactView {
         } catch (ContactNotFoundException e) {
             MessageHelper.erro("An error occurred while trying to update the contact, info: " + e.getMessage());
         }
-
     }
 
 }

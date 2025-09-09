@@ -40,11 +40,28 @@ public class ContactService {
         contactDAO.updateContact(contact);
     }
 
+    public void deleteContact(Contact contact) {
+
+        contactDAO.deleteContact(contact);
+    }
+
     public Contact findById(long id) {
 
         if (id <= 0) throw new ServiceException("Arguments cannot be null");
 
         return contactDAO.findContactById(id);
+    }
+
+    public Contact findByEmail(Email email) {
+        if (email == null) throw new ServiceException("Arguments cannot be null");
+
+        return contactDAO.findContactByEmail(email);
+    }
+
+    public Contact findByName(String name) {
+        if (name == null) throw new ServiceException("Arguments cannot be null");
+
+        return contactDAO.findContactByName(name);
     }
 
     public List<Contact> getAllContacts() throws SQLException {

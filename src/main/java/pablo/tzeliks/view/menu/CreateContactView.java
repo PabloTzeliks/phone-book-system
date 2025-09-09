@@ -6,7 +6,6 @@ import pablo.tzeliks.service.ContactService;
 import pablo.tzeliks.view.helper.MenuHelper;
 import pablo.tzeliks.view.helper.MessageHelper;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CreateContactView {
@@ -35,5 +34,4 @@ public class CreateContactView {
             MessageHelper.erro("An error occurred while trying to create the contact, info: " + e.getMessage());
         }
     }
-
 }
