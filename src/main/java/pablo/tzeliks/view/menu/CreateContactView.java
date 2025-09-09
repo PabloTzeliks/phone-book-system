@@ -1,5 +1,7 @@
 package pablo.tzeliks.view.menu;
 
+import pablo.tzeliks.model.valueobjects.Email;
+import pablo.tzeliks.model.valueobjects.PhoneNumber;
 import pablo.tzeliks.service.ContactService;
 import pablo.tzeliks.view.helper.MenuHelper;
 import pablo.tzeliks.view.helper.MessageHelper;
@@ -27,9 +29,9 @@ public class CreateContactView {
 
         try {
 
-            service.createContact(name, phonenumber, email, observation);
+            service.createContact(name, new PhoneNumber(phonenumber), new Email(email), observation);
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             MessageHelper.erro("An error occurred while trying to create the contact, info: " + e.getMessage());
         }
     }

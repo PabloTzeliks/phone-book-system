@@ -12,20 +12,20 @@ public class Contact {
     private String observation;
 
     // DB Insertion
-    public Contact(Email email, String observation, PhoneNumber phoneNumber, String name) {
+    public Contact(String name, PhoneNumber phoneNumber, Email email, String observation) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.observation = observation;
-        this.phoneNumber = phoneNumber;
-        this.name = name;
     }
 
     // DB Extraction
-    public Contact(long id, Email email, String observation, PhoneNumber phoneNumber, String name) {
+    public Contact(long id, String name, PhoneNumber phoneNumber, Email email, String observation) {
         this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.observation = observation;
-        this.phoneNumber = phoneNumber;
-        this.name = name;
     }
 
     public long getId() {

@@ -24,24 +24,23 @@ public class ContactService {
             throw new ServiceException("Arguments cannot be null");
         }
 
-        if (name.isBlank() || phonenumber.getPhoneNumber().isBlank() || email.getValue().isBlank() || observation.isBlank()) {
+        if (name.isBlank() || observation.isBlank()) {
             throw new ServiceException("Arguments cannot be empty");
         }
 
-        Contact contact = new Contact(email, name, phonenumber, observation);
+        Contact contact = new Contact(name, phonenumber, email, observation);
 
         contactDAO.saveContact(contact);
 
         return contact;
     }
 
-    public Contact updateContact(Contact contact) {
+    public void updateContact(Contact contact) {
 
         contactDAO.updateContact(contact);
-
     }
 
-    public Contact findById(int id) {
+    public Contact findById(long id) {
 
         if (id <= 0) throw new ServiceException("Arguments cannot be null");
 

@@ -12,7 +12,7 @@ public interface ContactDAO {
     void deleteContact(Contact contact) ;
     void updateContact(Contact contact);
 
-    Contact findContactById(int id);
+    Contact findContactById(long id);
     Contact findContactByEmail(Email email);
 
     List<Contact> getAllContacts() throws SQLException;

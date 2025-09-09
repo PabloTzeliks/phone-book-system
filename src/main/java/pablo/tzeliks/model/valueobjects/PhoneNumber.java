@@ -21,6 +21,8 @@ public class PhoneNumber {
             throw new InvalidPhoneNumber("Only use numbers in Phone Number field");
         }
 
+        this.phoneNumber = phoneNumber;
+
     }
 
     public String getPhoneNumber() {

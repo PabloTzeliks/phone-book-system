@@ -36,7 +36,7 @@ public class ContactDAOImpl implements ContactDAO {
             }
 
         } catch (SQLException ex) {
-            throw new RuntimeException("An error occurred trying to save Contact: ", ex); // Testar isso
+            ex.printStackTrace();
         }
     }
 
@@ -66,13 +66,13 @@ public class ContactDAOImpl implements ContactDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("An error occurred trying to delete Contact: ", e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void updateContact(Contact contact) {
-        String sql = "UPDATE contact SET name = ?, phonenumber = ?, email = ?, observation = ? WHERE email = ?";
+        String sql = "UPDATE contact SET name = ?, phonenumber = ?, email = ?, observation = ? WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -80,22 +80,19 @@ public class ContactDAOImpl implements ContactDAO {
             stmt.setString(2, contact.getPhoneNumber().getPhoneNumber());
             stmt.setString(3, contact.getEmail().getValue());
             stmt.setString(4, contact.getObservation());
-            stmt.setString(5, contact.getEmail().getValue());
+            stmt.setLong(5, contact.getId());
 
             int affected = stmt.executeUpdate();
-            if (affected == 0) {
-                throw new ContactNotFoundException("Cannot find contact to update: " + contact.getEmail().getValue());
-            }
 
         } catch (SQLException e) {
-            throw new RuntimeException("An error occurred trying to update Contact: ", e);
+            e.printStackTrace();
         }
     }
 
     // Reading Methods
 
     @Override
-    public Contact findContactById(int id) {
+    public Contact findContactById(long id) {
         String sql = "SELECT id, name, phonenumber, email, observation FROM contact WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -113,11 +110,12 @@ public class ContactDAOImpl implements ContactDAO {
                 String emailDb = rs.getString("email");
                 String observation = rs.getString("observation");
 
-                return new Contact(dbId, new Email(emailDb), name, new PhoneNumber(phonenumberDb), observation);
+                return new Contact(dbId, name, new PhoneNumber(phonenumberDb), new Email(emailDb), observation);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("An error occurred trying to search Contact by id: ", e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override
@@ -139,11 +137,12 @@ public class ContactDAOImpl implements ContactDAO {
                 String emailDb = rs.getString("email");
                 String observation = rs.getString("observation");
 
-                return new Contact(id, new Email(emailDb), name, new PhoneNumber(phonenumberDb), observation);
+                return new Contact(id, name, new PhoneNumber(phonenumberDb), new Email(emailDb), observation);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("An error occurred trying to search Contact by email: ", e);
+            e.printStackTrace();
         }
+        return null;
     }
 
     // Listing Methods
@@ -165,7 +164,7 @@ public class ContactDAOImpl implements ContactDAO {
                     String email = rs.getString("email");
                     String observation = rs.getString("observation");
 
-                    Contact contact = new Contact(id, new Email(email), name, new PhoneNumber(phonenumber), observation);
+                    Contact contact = new Contact(id, name, new PhoneNumber(phonenumber), new Email(email), observation);
                     contacts.add(contact);
                 }
             }

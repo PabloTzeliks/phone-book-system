@@ -25,8 +25,8 @@ public class ContactPrinter {
 
         System.out.println("ID: " + contact.getId());
         System.out.println("Nome: " + contact.getName());
-        System.out.println("Número de Telefone: " + contact.getPhoneNumber());
-        System.out.println("Email: " + contact.getEmail());
+        System.out.println("Número de Telefone: " + contact.getPhoneNumber().getPhoneNumber());
+        System.out.println("Email: " + contact.getEmail().getValue());
         System.out.println("Observação: " + contact.getObservation());
     }
 

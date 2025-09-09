@@ -6,6 +6,7 @@ import pablo.tzeliks.view.helper.MenuHelper;
 import pablo.tzeliks.view.helper.MessageHelper;
 import pablo.tzeliks.view.menu.CreateContactView;
 import pablo.tzeliks.view.menu.ListAllContactsView;
+import pablo.tzeliks.view.menu.UpdateContactView;
 
 import java.util.Scanner;
 
@@ -33,9 +34,9 @@ public class ConsoleController {
                     case 2:
                         ListAllContactsView.execute(scanner, service);
                         break;
-//                    case 3:
-//                        ListarSensoresView.executar(scanner, serviceFacade);
-//                        break;
+                    case 3:
+                        UpdateContactView.execute(scanner, service);
+                        break;
 //                    case 4:
 //                        RegistrarMedicaoView.executar(scanner, serviceFacade);
 //                        break;

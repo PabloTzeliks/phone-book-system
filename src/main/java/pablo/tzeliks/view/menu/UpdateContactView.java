@@ -20,6 +20,8 @@ public class UpdateContactView {
         System.out.println("Digite o ID do Contato que deseja editar: ");
         int id = sc.nextInt();
 
+        sc.nextLine();
+
         try {
 
             Contact contact = service.findById(id);

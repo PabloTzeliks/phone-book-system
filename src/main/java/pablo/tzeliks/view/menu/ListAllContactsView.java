@@ -24,7 +24,5 @@ public class ListAllContactsView {
         } catch (SQLException e) {
             MessageHelper.erro("An error occurred while trying to list all contacts, info: " + e.getMessage());
         }
-
     }
-
 }
